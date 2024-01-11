@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.codx.todotask.model.mapper.SysUserMapper">
+    <resultMap type="top.codx.todotask.model.entity.SysUser" id="SysUserMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="userPasswd" column="user_passwd" jdbcType="VARCHAR"/>
+        <result property="userSex" column="user_sex" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="userAvatar" column="user_avatar" jdbcType="VARCHAR"/>
+        <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
+        <result property="userAutonym" column="user_autonym" jdbcType="VARCHAR"/>
+        <result property="userSite" column="user_site" jdbcType="VARCHAR"/>
+        <result property="userBirthday" column="user_birthday" jdbcType="TIMESTAMP"/>
+        <result property="wxOpenid" column="wx_openid" jdbcType="VARCHAR"/>
+        <result property="userSignature" column="user_signature" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
+        <result property="isDel" column="is_del" jdbcType="VARCHAR"/>
+        <result property="isEnable" column="is_enable" jdbcType="VARCHAR"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 基本字段 -->
+    <sql id="Base_field">
+        id,
+        user_code,
+        user_name,
+        nick_name,
+        user_passwd,
+        user_sex,
+        role_id,
+        user_avatar,
+        user_phone,
+        user_email,
+        user_autonym,
+        user_site,
+        user_birthday,
+        wx_openid,
+        user_signature,
+        created_time,
+        created_by,
+        updated_time,
+        updated_by,
+        is_del,
+        is_enable,
+        remarks
+    </sql>
+    <!-- 基本Map -->
+    <sql id="Base_Map">
+        id             as id,
+        user_code      as userCode,
+        user_name      as userName,
+        nick_name      as nickName,
+        user_passwd    as userPasswd,
+        user_sex       as userSex,
+        role_id        as roleId,
+        user_avatar    as userAvatar,
+        user_phone     as userPhone,
+        user_email     as userEmail,
+        user_autonym   as userAutonym,
+        user_site      as userSite,
+        user_birthday  as userBirthday,
+        wx_openid      as wxOpenid,
+        user_signature as userSignature,
+        created_time   as createdTime,
+        created_by     as createdBy,
+        updated_time   as updatedTime,
+        updated_by     as updatedBy,
+        is_del         as isDel,
+        is_enable      as isEnable,
+        remarks        as remarks
+    </sql>
+    <!-- 通过ID查询单条数据 -->
+    <select id="queryById" resultMap="SysUserMap">
+        select
+        <include refid="Base_field"/>
+        from SYS_USER
+        where id = #{id}
+          and is_del = '0'
+    </select>
+
+    <!--分页查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysUserMap">
+        select
+        <include refid="Base_field"/>
+        from SYS_USER
+        <where>
+            is_del = '0'
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="userCode != null and userCode != ''">
+                and user_code = #{userCode}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="userPasswd != null and userPasswd != ''">
+                and user_passwd = #{userPasswd}
+            </if>
+            <if test="userSex != null and userSex != ''">
+                and user_sex = #{userSex}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="userAvatar != null and userAvatar != ''">
+                and user_avatar = #{userAvatar}
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                and user_phone = #{userPhone}
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                and user_email = #{userEmail}
+            </if>
+            <if test="userAutonym != null and userAutonym != ''">
+                and user_autonym = #{userAutonym}
+            </if>
+            <if test="userSite != null and userSite != ''">
+                and user_site = #{userSite}
+            </if>
+            <if test="userBirthday != null and userBirthday != ''">
+                and user_birthday = #{userBirthday}
+            </if>
+            <if test="wxOpenid != null and wxOpenid != ''">
+                and wx_openid = #{wxOpenid}
+            </if>
+            <if test="userSignature != null and userSignature != ''">
+                and user_signature = #{userSignature}
+            </if>
+            <if test="createdTime != null and createdTime != ''">
+                and created_time = #{createdTime}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedTime != null and updatedTime != ''">
+                and updated_time = #{updatedTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="isDel != null and isDel != ''">
+                and is_del = #{isDel}
+            </if>
+            <if test="isEnable != null and isEnable != ''">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from SYS_USER
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="userCode != null and userCode != ''">
+                and user_code = #{userCode}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </if>
+            <if test="userPasswd != null and userPasswd != ''">
+                and user_passwd = #{userPasswd}
+            </if>
+            <if test="userSex != null and userSex != ''">
+                and user_sex = #{userSex}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="userAvatar != null and userAvatar != ''">
+                and user_avatar = #{userAvatar}
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                and user_phone = #{userPhone}
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                and user_email = #{userEmail}
+            </if>
+            <if test="userAutonym != null and userAutonym != ''">
+                and user_autonym = #{userAutonym}
+            </if>
+            <if test="userSite != null and userSite != ''">
+                and user_site = #{userSite}
+            </if>
+            <if test="userBirthday != null and userBirthday != ''">
+                and user_birthday = #{userBirthday}
+            </if>
+            <if test="wxOpenid != null and wxOpenid != ''">
+                and wx_openid = #{wxOpenid}
+            </if>
+            <if test="userSignature != null and userSignature != ''">
+                and user_signature = #{userSignature}
+            </if>
+            <if test="createdTime != null and createdTime != ''">
+                and created_time = #{createdTime}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and created_by = #{createdBy}
+            </if>
+            <if test="updatedTime != null and updatedTime != ''">
+                and updated_time = #{updatedTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and updated_by = #{updatedBy}
+            </if>
+            <if test="isDel != null and isDel != ''">
+                and is_del = #{isDel}
+            </if>
+            <if test="isEnable != null and isEnable != ''">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--新增数据-->
+    <insert id="insert">
+        insert into SYS_USER(id, user_code, user_name, nick_name, user_passwd, user_sex, role_id, user_avatar,
+                             user_phone, user_email, user_autonym, user_site, user_birthday, wx_openid, user_signature,
+                             created_time, created_by, updated_time, updated_by, is_del, is_enable, remarks)
+        values (#{id}, #{userCode}, #{userName}, #{nickName}, #{userPasswd}, #{userSex}, #{roleId}, #{userAvatar},
+                #{userPhone}, #{userEmail}, #{userAutonym}, #{userSite}, #{userBirthday}, #{wxOpenid}, #{userSignature},
+                #{createdTime}, #{createdBy}, #{updatedTime}, #{updatedBy}, #{isDel}, #{isEnable}, #{remarks})
+    </insert>
+
+    <!-- 批量新增数据 -->
+    <insert id="insertBatch">
+        insert into SYS_USER(id, user_code, user_name, nick_name, user_passwd, user_sex, role_id, user_avatar,
+                             user_phone, user_email, user_autonym, user_site, user_birthday, wx_openid, user_signature,
+                             created_time, created_by, updated_time, updated_by, is_del, is_enable, remarks)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.userCode}, #{entity.userName}, #{entity.nickName}, #{entity.userPasswd},
+             #{entity.userSex}, #{entity.roleId}, #{entity.userAvatar}, #{entity.userPhone}, #{entity.userEmail},
+             #{entity.userAutonym}, #{entity.userSite}, #{entity.userBirthday}, #{entity.wxOpenid},
+             #{entity.userSignature}, #{entity.createdTime}, #{entity.createdBy}, #{entity.updatedTime},
+             #{entity.updatedBy}, #{entity.isDel}, #{entity.isEnable}, #{entity.remarks})
+        </foreach>
+    </insert>
+
+    <!-- 更新数据 -->
+    <update id="update">
+        update SYS_USER
+        <set>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="userCode != null and userCode != ''">
+                user_code = #{userCode},
+            </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="userPasswd != null and userPasswd != ''">
+                user_passwd = #{userPasswd},
+            </if>
+            <if test="userSex != null and userSex != ''">
+                user_sex = #{userSex},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
+            </if>
+            <if test="userAvatar != null and userAvatar != ''">
+                user_avatar = #{userAvatar},
+            </if>
+            <if test="userPhone != null and userPhone != ''">
+                user_phone = #{userPhone},
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                user_email = #{userEmail},
+            </if>
+            <if test="userAutonym != null and userAutonym != ''">
+                user_autonym = #{userAutonym},
+            </if>
+            <if test="userSite != null and userSite != ''">
+                user_site = #{userSite},
+            </if>
+            <if test="userBirthday != null and userBirthday != ''">
+                user_birthday = #{userBirthday},
+            </if>
+            <if test="wxOpenid != null and wxOpenid != ''">
+                wx_openid = #{wxOpenid},
+            </if>
+            <if test="userSignature != null and userSignature != ''">
+                user_signature = #{userSignature},
+            </if>
+            <if test="createdTime != null and createdTime != ''">
+                created_time = #{createdTime},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedTime != null and updatedTime != ''">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy},
+            </if>
+            <if test="isDel != null and isDel != ''">
+                is_del = #{isDel},
+            </if>
+            <if test="isEnable != null and isEnable != ''">
+                is_enable = #{isEnable},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from SYS_USER
+        where id = #{id}
+    </delete>
+    <!--通过用户id获取所有权限-->
+    <select id="getAllPurviewByUserId" resultType="java.lang.String">
+        SELECT m.permission
+        FROM SYS_USER_ROLE ur
+                 LEFT JOIN SYS_ROLE r ON ur.role_id = r.id
+                 LEFT JOIN SYS_ROLE_MENU rm ON ur.role_id = rm.role_id
+                 LEFT JOIN SYS_MENU m ON m.id = rm.menu_id
+        WHERE ur.user_id = #{id}
+          AND m.permission IS NOT NULL
+          AND m.permission != ''
+    </select>
+    <!--获取除了密码外的用户信息-->
+    <select id="selectByPrimaryKeyExcludePassword" resultMap="SysUserMap">
+        SELECT id,
+               user_code,
+               user_name,
+               nick_name,
+               user_sex,
+               user_avatar,
+               user_phone,
+               user_email,
+               user_autonym,
+               user_site,
+               user_birthday,
+               user_signature,
+               is_del,
+               is_enable,
+               remarks
+        FROM SYS_USER
+        WHERE id = #{userId}
+    </select>
+</mapper>

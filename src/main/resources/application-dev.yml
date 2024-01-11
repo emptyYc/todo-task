@@ -1,0 +1,120 @@
+server:
+  # 服务端口
+  port: 18080
+  tomcat:
+    accept-count: 100
+    threads:
+      # 1核2g内存为200,4核8g内存为800
+      max: 200
+      # 最小空闲线程数量，保证线程池中一直有最少100个线程，防止流量激增
+      min-spare: 100
+    # 连接超时时间
+    connection-timeout: 5000
+    # 最大连接数，可以适应 APR 模式
+    max-connections: 8192
+
+# 日志
+logging:
+  level:
+    org:
+      springframework: warn
+    top:
+      codx:
+        todotask: debug
+
+    # 项目上下文路径
+spring:
+  mvc:
+    pathmatch:
+      # 路径匹配规则
+      matching-strategy: ant_path_matcher
+  # 序列化设置
+  jackson:
+    # 时区
+    time-zone: GMT+8
+    # 日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+  #  redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-active: 100
+        max-idle: 100
+        max-wait: 5000
+
+
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://localhost:3306/todotask?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+      username: ###
+      password: ###
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置连接超时时间
+      connectTimeout: 30000
+      # 配置网络超时时间
+      socketTimeout: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username: freya
+        login-password: freya@2023
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: top.codx.todotask.model.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 映射为 Map 集合时,为 null 的字段不要省略
+    call-setters-on-nulls: true
+
+
+# 分页插件配置
+pagehelper:
+  # 数据库方言
+  helper-dialect: mysql
+  # 分页合理化
+  reasonable: true
+  params: count=countSql
+  support-methods-arguments: true
+

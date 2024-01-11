@@ -1,0 +1,13 @@
+Spring Boot Version: ${spring-boot.version}
+Spring Application Name: ${spring.application.name}
+${AnsiColor.BRIGHT_YELLOW}
+.___________.  ______    _______    ______   .___________.     ___           _______. __  ___
+|           | /  __  \  |       \  /  __  \  |           |    /   \         /       ||  |/  / 
+`---|  |----`|  |  |  | |  .--.  ||  |  |  | `---|  |----`   /  ^  \       |   (----`|  '  /  ${AnsiColor.BRIGHT_RED}
+    |  |     |  |  |  | |  |  |  ||  |  |  |     |  |       /  /_\  \       \   \    |    <   
+    |  |     |  `--'  | |  '--'  ||  `--'  |     |  |      /  _____  \  .----)   |   |  .  \  
+    |__|      \______/  |_______/  \______/      |__|     /__/     \__\ |_______/    |__|\__\ 
+${AnsiColor.BRIGHT_CYAN}
+swagger3接口文档 : http://localhost:${server.port}/doc.html
+druid监控       : http://localhost:${server.port}/druid
+spring监控      : http://localhost:${server.port}/actuator
